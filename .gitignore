@@ -1,0 +1,11 @@
+# node modules
+node_modules/
+
+# carpetas de salida generadas por gulp
+dist/
+build/
+public/
+
+# archivos temporales o del sistema
+.DS_Store
+*.log

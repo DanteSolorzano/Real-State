@@ -6,6 +6,11 @@
     .footer-container {
         padding-top: $separacion / 2;
     }
+    .navbar {
+        visibility: visible;
+        opacity: 1;
+        height: auto;
+    }
 
     .copyrigth {
         color: $blanco;

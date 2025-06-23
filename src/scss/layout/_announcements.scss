@@ -6,7 +6,8 @@
 .announcement {
     background-color: $gris;
     border: 1px solid darken($gris, 10);
-    
+    margin-bottom: 2rem;
+
     .announcement-content {
         padding: 2rem;
     }

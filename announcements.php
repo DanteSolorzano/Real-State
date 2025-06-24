@@ -1,37 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real State</title>
-    <link rel="stylesheet" href="build/css/app.css">
-</head>
-<body>
+<?php
 
-    <header class="header">
-        <div class="container header-content">
-           <div class="bar">
-            
-            <a href="/"> <img src="build/img/logo.svg" alt="Logo Real State"></a>
-               
-            <div class="mobile-menu">
-                <img src="build/img/barras.svg" alt="Menu Responsive"> 
-             </div>
- 
-             <div class="right">
-                 <img src="build/img/dark-mode.svg" alt="" class="dark-mode-button">
-                 
-                 <nav class="navbar">
-                     <a href="aboutUs.html">About Us</a>
-                     <a href="announcements.html">Announcements</a>
-                     <a href="blog.html">Blog</a>
-                     <a href="contact.html">Contact</a>
-                 </nav>
-             </div>
-           
-        </div>
-        </div>
-    </header>
+    require 'includes/functions.php';
+
+    includeTemplates('header');
+?>
 
     <main class="container section">
         <h1>Property Listings</h1>
@@ -63,7 +35,7 @@
                         </li>                            
                     </ul>
 
-                    <a href="announcement.html" class="yellow-button-block">Explore Property</a>
+                    <a href="announcement.php" class="yellow-button-block">Explore Property</a>
                 </div> <!--announcement content-->
             </div> <!--announcement -->
 
@@ -94,7 +66,7 @@
                         </li>                            
                     </ul>
 
-                    <a href="announcement.html" class="yellow-button-block">Explore Property</a>
+                    <a href="announcement.php" class="yellow-button-block">Explore Property</a>
                 </div> <!--announcement content-->
             </div> <!--announcement -->
 
@@ -125,7 +97,7 @@
                         </li>                            
                     </ul>
 
-                    <a href="announcement.html" class="yellow-button-block">Explore Property</a>
+                    <a href="announcement.php" class="yellow-button-block">Explore Property</a>
                 </div> <!--announcement content-->
             </div> <!--announcement -->
             <div class="announcement">
@@ -155,7 +127,7 @@
                         </li>                            
                     </ul>
 
-                    <a href="announcement.html" class="yellow-button-block">Explore Property</a>
+                    <a href="announcement.php" class="yellow-button-block">Explore Property</a>
                 </div> <!--announcement content-->
             </div> <!--announcement -->
 
@@ -186,7 +158,7 @@
                         </li>                            
                     </ul>
 
-                    <a href="announcement.html" class="yellow-button-block">Explore Property</a>
+                    <a href="announcement.php" class="yellow-button-block">Explore Property</a>
                 </div> <!--announcement content-->
             </div> <!--announcement -->
 
@@ -217,27 +189,11 @@
                         </li>                            
                     </ul>
 
-                    <a href="announcement.html" class="yellow-button-block">Explore Property</a>
+                    <a href="announcement.php" class="yellow-button-block">Explore Property</a>
                 </div> <!--announcement content-->
             </div> <!--announcement -->
 
         </div> <!--.announcement-container-->
     </main>
 
-    <footer class="footer section">
-        <div class="container footer-container">
-            <nav class="navbar">
-                <a href="aboutUs.html">About Us</a>
-                <a href="announcements.html">Announcements</a>
-                <a href="blog.html">Blog</a>
-                <a href="contact.html">Contact</a>
-            </nav>
-        </div>
-
-        <p class="copyrigth">All the right reserved 2025 &copy;</p>
-    </footer>
-    
-
-    <script src="build/js/bundle.min.js"></script>
-</body>
-</html>
+    <?php include 'includes/templates/footer.php' ?>

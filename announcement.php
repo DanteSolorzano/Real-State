@@ -1,37 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real State</title>
-    <link rel="stylesheet" href="build/css/app.css">
-</head>
-<body>
+<?php
 
-    <header class="header">
-        <div class="container header-content">
-           <div class="bar">
-            
-            <a href="/"> <img src="build/img/logo.svg" alt="Logo Real State"></a>
-               
-            <div class="mobile-menu">
-                <img src="build/img/barras.svg" alt="Menu Responsive"> 
-             </div>
- 
-             <div class="right">
-                 <img src="build/img/dark-mode.svg" alt="" class="dark-mode-button">
-                 
-                 <nav class="navbar">
-                     <a href="aboutUs.html">About Us</a>
-                     <a href="announcements.html">Announcements</a>
-                     <a href="blog.html">Blog</a>
-                     <a href="contact.html">Contact</a>
-                 </nav>
-             </div>
-           
-            </div>
-        </div>
-    </header>
+    require 'includes/functions.php';
+
+    includeTemplates('header');
+?>
+
 
     <main class="container section content-center">
         <h1>House for Sale on the Woods</h1>
@@ -65,20 +38,6 @@
 
     </main>
 
-    <footer class="footer section">
-        <div class="container footer-container">
-            <nav class="navbar">
-                <a href="aboutUs.html">About Us</a>
-                <a href="announcements.html">Announcements</a>
-                <a href="blog.html">Blog</a>
-                <a href="contact.html">Contact</a>
-            </nav>
-        </div>
-
-        <p class="copyrigth">All the right reserved 2025 &copy;</p>
-    </footer>
-    
-
-    <script src="build/js/bundle.min.js"></script>
-</body>
-</html>
+    <?php 
+    includeTemplates('footer');
+?>

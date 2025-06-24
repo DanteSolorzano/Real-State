@@ -1,40 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real State</title>
-    <link rel="stylesheet" href="build/css/app.css">
-</head>
-<body>
+<?php
 
-    <header class="header home">
-        <div class="container header-content">
-           <div class="bar">
-            
-            <a href="/"> <img src="build/img/logo.svg" alt="Logo Real State"></a>
+    require 'includes/functions.php';
 
-            <div class="mobile-menu">
-               <img src="build/img/barras.svg" alt="Menu Responsive"> 
-            </div>
+    includeTemplates('header', $home = true);
+?>
 
-            <div class="right">
-                <img src="build/img/dark-mode.svg" alt="" class="dark-mode-button">
-                
-                <nav class="navbar">
-                    <a href="aboutUs.html">About Us</a>
-                    <a href="announcements.html">Announcements</a>
-                    <a href="blog.html">Blog</a>
-                    <a href="contact.html">Contact</a>
-                </nav>
-            </div>
-               
-           
-           
-        </div>
-           <h1>Exclusive Luxury Homes & Apartments for Sale</h1>
-        </div>
-    </header>
 
     <main class="container section">
         <h1>More about us</h1>
@@ -89,7 +59,7 @@
                         </li>                            
                     </ul>
 
-                    <a href="announcement.html" class="yellow-button-block">Explore Property</a>
+                    <a href="announcement.php" class="yellow-button-block">Explore Property</a>
                 </div> <!--announcement content-->
             </div> <!--announcement -->
 
@@ -120,7 +90,7 @@
                         </li>                            
                     </ul>
 
-                    <a href="announcement.html" class="yellow-button-block">Explore Property</a>
+                    <a href="announcement.php" class="yellow-button-block">Explore Property</a>
                 </div> <!--announcement content-->
             </div> <!--announcement -->
 
@@ -151,14 +121,14 @@
                         </li>                            
                     </ul>
 
-                    <a href="announcement.html" class="yellow-button-block">Explore Property</a>
+                    <a href="announcement.php" class="yellow-button-block">Explore Property</a>
                 </div> <!--announcement content-->
             </div> <!--announcement -->
 
         </div> <!--.announcement-container-->
 
         <div class="aline-right">
-            <a href="announcements.html" class="green-button">View All Homes</a>
+            <a href="announcements.php" class="green-button">View All Homes</a>
         </div>
 
     </section>
@@ -166,7 +136,7 @@
     <section class="image-contact">
         <h2>Find your Dream House</h2>
         <p>Complete the form and one of our advisors will get in touch with you shortly</p>
-        <a href="contact.html" class="yellow-button">Contact Us</a>
+        <a href="contact.php" class="yellow-button">Contact Us</a>
     </section>
 
     <div class="container section bottom-section">
@@ -183,7 +153,7 @@
                 </div>
 
                 <div class="text-entry">
-                    <a href="entrada.html">
+                    <a href="entrada.php">
                         <h4>Designing the Perfect Rooftop Terrace</h4>
                         <p class="information-meta">Written on <span>June 22, 2025</span> by: <span>Dante, Real Estate Agent</span></p>
                         <p>Smart tips for building a rooftop terrace with quality materials and a budget-friendly approach.</p>
@@ -201,7 +171,7 @@
                 </div>
 
                 <div class="text-entry">
-                    <a href="entrada.html">
+                    <a href="entrada.php">
                         <h4>A guide to home decoration </h4>
                         <p class="information-meta">Written on <span>June 22, 2025</span> by: <span>Dante, Real Estate Agent</span></p>
                         <p>Smart tips for building a rooftop terrace with quality materials and a budget-friendly approach.</p>
@@ -222,20 +192,6 @@
 
     </div>
 
-    <footer class="footer section">
-        <div class="container footer-container">
-            <nav class="navbar">
-                <a href="aboutUs.html">About Us</a>
-                <a href="announcements.html">Announcements</a>
-                <a href="blog.html">Blog</a>
-                <a href="contact.html">Contact</a>
-            </nav>
-        </div>
-
-        <p class="copyrigth">All the right reserved 2025 &copy;</p>
-    </footer>
-    
-
-    <script src="build/js/bundle.min.js"></script>
-</body>
-</html>
+<?php 
+    includeTemplates('footer');
+?>

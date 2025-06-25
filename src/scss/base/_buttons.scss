@@ -9,4 +9,10 @@
 .green-button {
     @include button($verde, inline-block)
 }
-
+.red-button-block {
+    @include button($red, block);
+    width: 100%;
+}
+.green-button-block {
+    @include button($verde, block)
+}

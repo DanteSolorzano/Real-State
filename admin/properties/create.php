@@ -167,7 +167,7 @@
                 <label for="wc">Bathrooms:</label>
                 <input type="number" name="wc" id="wc" placeholder="e.g: 2" min="1" max="15" value="<?php echo $wc; ?>">
 
-                <label for="parking">Parkin</label>
+                <label for="parking">Parking</label>
                 <input type="number" name="parking" id="parking" placeholder="e.g: 3" min="1" max="15" value="<?php echo $parking; ?>">
 
             </fieldset>

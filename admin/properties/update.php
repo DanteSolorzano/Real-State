@@ -1,4 +1,10 @@
 <?php
+    require '../../includes/functions.php';
+    $auth = isAuthenticated();
+
+    if(!$auth){
+        header('Location: /');
+    }
 
     //validate the id
     $id = $_GET['id'];
@@ -147,7 +153,6 @@
     }
 
 
-    require '../../includes/functions.php';
     includeTemplates('header');
 ?>
 

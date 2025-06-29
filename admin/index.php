@@ -1,5 +1,12 @@
 <?php
 
+require '../includes/functions.php';
+$auth = isAuthenticated();
+
+if(!$auth){
+    header('Location: /');
+}
+
     //import the db connection
     require '../includes/config/database.php';
     $db = connectionDb();
@@ -43,7 +50,6 @@
     }
 
     //add a template
-    require '../includes/functions.php';
     includeTemplates('header');
 ?>
 

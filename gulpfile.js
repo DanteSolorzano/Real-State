@@ -61,8 +61,14 @@ function watchArchivos() {
     watch(paths.imagenes, versionWebp);
 }
 
+function html() {
+    return src('*.html')  // todos los HTML en la raíz
+        .pipe(dest('build'));
+}
+
+
 exports.css = css;
 exports.watchArchivos = watchArchivos;
 exports.default = parallel(css, javascript, imagenes, versionWebp, watchArchivos); 
 // Tarea de producción (sin watchers)
-exports.build = parallel(css, javascript, imagenes, versionWebp);
+exports.build = parallel(html, css, javascript, imagenes, versionWebp);

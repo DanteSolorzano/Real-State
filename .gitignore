@@ -9,3 +9,4 @@ public/
 # archivos temporales o del sistema
 .DS_Store
 *.log
+.vercel

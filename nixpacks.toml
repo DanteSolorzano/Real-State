@@ -1,0 +1,8 @@
+# instalar (PHP y soporte para MySQL)
+[phases.setup]
+nixPkgs = ["php", "php81Extensions.mysqli", "php81Extensions.pdo_mysql"]
+
+# 2.arrancar el servidor
+# Usamos el servidor interno de PHP que es ligero y cero configuración
+[start]
+cmd = "php -S 0.0.0.0:$PORT"

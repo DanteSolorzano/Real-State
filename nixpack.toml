@@ -1,0 +1,12 @@
+# 1. Instalamos PHP 8.2 y sus extensiones específicas
+# Al poner 'php82' y 'php82Extensions', garantizamos que son compatibles
+[phases.setup]
+nixPkgs = ["php82", "php82Extensions.mysqli", "php82Extensions.pdo_mysql"]
+
+# 2. Configuración opcional para asegurarnos de que cargue las extensiones
+[phases.build]
+cmds = ["php -v", "php -m"]
+
+# 3. El comando de arranque que ya sabemos que funciona con el puerto
+[start]
+cmd = "php -S 0.0.0.0:$PORT"

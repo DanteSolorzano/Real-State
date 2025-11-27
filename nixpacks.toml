@@ -1,7 +1,0 @@
-# 1. Instalamos PHP y las extensiones OBLIGATORIAS para MySQL
-[phases.setup]
-nixPkgs = ["php", "phpExtensions.mysqli", "phpExtensions.pdo_mysql"]
-
-# 2. Forzamos el servidor simple (para que no falle el puerto ni use FrankenPHP)
-[start]
-cmd = "php -S 0.0.0.0:$PORT"

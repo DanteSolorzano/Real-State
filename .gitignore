@@ -3,8 +3,9 @@ node_modules/
 
 # carpetas de salida generadas por gulp
 dist/
-build/
 public/
+
+#user
 
 # archivos temporales o del sistema
 .DS_Store

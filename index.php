@@ -96,7 +96,7 @@
                 <blockquote>
                     I had an amazing experience! The team was professional, attentive, and helped me find the perfect home. Highly recommended!
                 </blockquote>
-                <p>- Jashua Solorzano</p>
+                <p>- Arturo Fonseca</p>
             </div>
         </section>
 

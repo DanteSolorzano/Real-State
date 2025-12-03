@@ -191,6 +191,9 @@ const translations = {
     "index-testimoniales-titulo": "Testimonials",
     "index-testimonial-cita":
       "I had an amazing experience! The team was professional, attentive, and helped me find the perfect home. Highly recommended!",
+    //ANNOUNCEMENTS
+    "anuncio-boton": "Explore Property",
+    "listado-titulo": "Property Listings",
   },
   es: {
     //HEADER Y FOOTER
@@ -273,6 +276,9 @@ const translations = {
     "index-testimoniales-titulo": "Testimoniales",
     "index-testimonial-cita":
       "¡Tuve una experiencia increíble! El equipo fue muy profesional, atento y me ayudaron a encontrar la casa perfecta. ¡Altamente recomendados!",
+    //Anuncios propiedades
+    "anuncio-boton": "Ver Propiedad",
+    "listado-titulo": "Lista de propiedades",
   },
 };
 

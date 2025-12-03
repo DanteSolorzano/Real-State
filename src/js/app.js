@@ -1,12 +1,20 @@
 document.addEventListener("DOMContentLoaded", function () {
   eventListeners();
-
   darkMode();
+
+  // AL CARGAR: Si el idioma detectado es español, traduce todo de inmediato
+  if (language === "es") {
+    updatePageTexts();
+  }
 });
 
+// Inicialización de la variable con LocalStorage
+let language = localStorage.getItem("lang") || "en";
+
 function darkMode() {
+  // ... (Tu código de dark mode se queda igual) ...
   const ratherDarkMode = window.matchMedia("prefers-color-scheme: dark");
-  //console.log(ratherDarkMode.matches);
+
   if (ratherDarkMode.matches) {
     document.body.classList.add("dark-mode");
   } else {
@@ -26,7 +34,6 @@ function darkMode() {
   buttonDarkMode.addEventListener("click", function () {
     document.body.classList.toggle("dark-mode");
 
-    //Para que el modo elegido se quede guardado en local-storage
     if (document.body.classList.contains("dark-mode")) {
       localStorage.setItem("modo-oscuro", "true");
     } else {
@@ -34,7 +41,6 @@ function darkMode() {
     }
   });
 
-  //Obtenemos el modo del color actual
   if (localStorage.getItem("modo-oscuro") === "true") {
     document.body.classList.add("dark-mode");
   } else {
@@ -44,25 +50,61 @@ function darkMode() {
 
 function eventListeners() {
   const mobileMenu = document.querySelector(".mobile-menu");
+  // Validación por seguridad
+  if (mobileMenu) {
+    mobileMenu.addEventListener("click", navegationResponsive);
+  }
 
-  mobileMenu.addEventListener("click", navegationResponsive);
-
-  // --- CÓDIGO NUEVO ---
   const translateButton = document.querySelector(".translate");
 
   translateButton.addEventListener("click", function () {
-    changeLanguage();
+    // 1. Lógica de Toggle (Cambio de estado)
+    if (language === "en") {
+      language = "es";
+    } else {
+      language = "en";
+    }
+
+    // 2. Persistencia (Guardar estado)
+    localStorage.setItem("lang", language);
+
+    // 3. Renderizado (Actualizar vista)
+    updatePageTexts();
   });
 }
 
 function navegationResponsive() {
   const navegation = document.querySelector(".navbar");
-
   if (navegation.classList.contains("show")) {
     navegation.classList.remove("show");
   } else {
     navegation.classList.add("show");
   }
+}
+
+// Nueva función optimizada que unifica los ciclos
+function updatePageTexts() {
+  const elementsToTranslate = document.querySelectorAll("[data-translate]");
+
+  elementsToTranslate.forEach((element) => {
+    const key = element.getAttribute("data-translate");
+
+    // Verificamos que language y la key existan en el diccionario
+    if (translations[language] && translations[language][key]) {
+      const translation = translations[language][key];
+
+      if (element.tagName === "INPUT" || element.tagName === "TEXTAREA") {
+        if (element.hasAttribute("placeholder")) {
+          element.placeholder = translation;
+        }
+        if (element.type === "submit") {
+          element.value = translation;
+        }
+      } else {
+        element.textContent = translation;
+      }
+    }
+  });
 }
 
 // 1. Objeto con todas las traducciones (Diccionario)
@@ -235,7 +277,6 @@ const translations = {
 };
 
 // Variable para saber el idioma actual
-let language = "en";
 
 function changeLanguage() {
   // 1. Alternar el idioma

@@ -1,19 +1,28 @@
 .footer {
-    padding: $separacion / 2 0 ;
-    background-color: $grisOscuro;
-    margin-bottom: 0;
+  padding: $separacion / 2 0;
+  background-color: $grisOscuro;
+  margin-bottom: 0;
 
-    .footer-container {
-        padding-top: $separacion / 2;
-    }
-    .navbar {
-        visibility: visible;
-        opacity: 1;
-        height: auto;
-    }
+  .footer-container {
+    padding-top: $separacion / 2;
+  }
+  .navbar {
+    visibility: visible;
+    opacity: 1;
+    height: auto;
 
-    .copyrigth {
-        color: $blanco;
-        text-align: center;
+    a {
+      // 2. Seleccionamos el último enlace (el del ícono)
+      &:last-of-type {
+        // 3. La magia: "margin-left: auto" ocupa todo el espacio vacío disponible
+        // empujando este elemento al final derecho.
+        margin-left: auto;
+      }
     }
+  }
+
+  .copyrigth {
+    color: $blanco;
+    text-align: center;
+  }
 }

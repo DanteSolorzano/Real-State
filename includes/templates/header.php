@@ -46,7 +46,10 @@
                         <a href="contact.php" data-translate="nav-contacto">Contact</a>
                         
                         <?php if($auth): ?>
-                        <a href="signOut.php" data-translate="nav-cerrar">Sign Out</a>
+                        <a href="signOut.php" data-translate="nav-cerrar"
+                        style="color: #71B100; font-weight: bold;">
+                        Sign Out
+                        </a>
                     <?php endif;?>
                     </nav>
                     </div>   

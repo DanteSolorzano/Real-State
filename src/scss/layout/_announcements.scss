@@ -1,44 +1,62 @@
 @include tablet {
-    .announcements-container {
-        @include grid(3, 2rem);
-    }
+  .announcements-container {
+    @include grid(3, 2rem);
+  }
 }
 .announcement {
-    background-color: $gris;
-    border: 1px solid darken($gris, 10);
-    margin-bottom: 2rem;
+  background-color: $gris;
+  border: 1.5px solid darken($gris, 10);
+  margin-bottom: 2rem;
+  height: 100%;
+  display: flex; // Hacemos que la card sea un contenedor flex
+  flex-direction: column; // Organizamos los elementos en columna
+  border-radius: 3px;
 
-    .announcement-content {
-        padding: 2rem;
-    }
+  .img-propertie {
+    height: 30rem; // Altura fija para todas las imágenes
+    width: 100%;
+    object-fit: cover; // Para que las imágenes mantengan proporción
+  }
 
-    h3, p {
-        margin: 0;
-    }
+  .announcement-content {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
 
+  h3,
+  p {
+    margin: 0;
+  }
+}
+// Grupo para mantener juntos precio, iconos y botón al fondo
+.price-features-container {
+  margin-top: auto; // Empuja todo este grupo hacia abajo
 }
 .price {
-    color: $verde;
-    font-weight: bold;
-    font-size: 3rem;
+  color: $verde;
+  font-weight: bold;
+  font-size: 3rem;
+  margin-top: auto;
 }
 
 .feature-icons {
-    display: flex;
-    list-style: none;
-    padding: 0;
-    max-width: 40rem;
-    
-    li {
-        flex: 1;
-        display: flex;
+  display: flex;
+  list-style: none;
+  padding: 0;
+  max-width: 40rem;
 
-        img {
-            flex: 0 0 5rem;
-            margin-right: 1rem;
-        }
-        p {
-            font-weight: $black;
-        }
+  li {
+    flex: 1;
+    display: flex;
+
+    img {
+      flex: 0 0 5rem;
+      margin-right: 1rem;
     }
+    p {
+      font-weight: $black;
+    }
+  }
 }

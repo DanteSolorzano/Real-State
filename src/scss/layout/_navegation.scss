@@ -24,6 +24,11 @@
   .nav-controls {
     display: flex;
   }
+  .translate {
+    @include tablet {
+      margin-top: 0;
+    }
+  }
 }
 
 .bar {

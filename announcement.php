@@ -7,8 +7,10 @@
         header('Location: /');
     }
 
+    require 'includes/app.php';
+
+
     //import connection
-    require 'includes/config/database.php';
     $db = connectionDb();
 
     //consult
@@ -22,13 +24,7 @@
         header('Location: /');
     }
 
-
     $propertie = mysqli_fetch_assoc($result);
-
-
-
-
-    require 'includes/functions.php';
 
     includeTemplates('header');
 ?>

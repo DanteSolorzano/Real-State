@@ -1,6 +1,11 @@
 <?php
 
-define('TEMPLATES_URL', __DIR__ . '/templates');
-define('FUNCIONES_URL', __DIR__ . 'funciones.php');
+require 'functions.php';
+require 'config/database.php';
+require __DIR__ . '/../vendor/autoload.php';
 
-//en carpetas donde se usa define no se recomienda cerrar el php
+use App\Propertie;
+
+$propertie = new Propertie;
+
+var_dump($propertie);

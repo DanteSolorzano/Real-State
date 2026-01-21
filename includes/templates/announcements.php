@@ -1,7 +1,6 @@
 <?php 
 
 //import connection
-require __DIR__ . '/../config/database.php';
 $db = connectionDb();
 
 //consult

@@ -1,0 +1,16 @@
+{
+    "name": "dantesolorzano/bienesraices_inicio2",
+    "description": "Implement POO to realstate project",
+    "authors": [
+        {
+            "name": "DanteSolorzano",
+            "email": "solorzanodante19@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\" : "./classes" 
+        }
+    }
+}

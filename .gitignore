@@ -11,3 +11,5 @@ public/
 .DS_Store
 *.log
 .vercel
+
+/vendor/

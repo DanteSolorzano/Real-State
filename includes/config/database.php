@@ -11,7 +11,7 @@ function connectionDb() : mysqli {
     $port = getenv('DB_PORT') ?: 3306; // El puerto estándar de MySQL
 
     // Creamos la conexión con las variables dinámicas
-    $db = mysqli_connect($host, $user, $pass, $name, $port);
+    $db =new mysqli($host, $user, $pass, $name, $port);
 
     if(!$db){
         echo "It cannot connect to the database"; 

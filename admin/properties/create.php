@@ -29,6 +29,13 @@
 
     //Ejecutar despues de que el usuario envie el formulario
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
+
+        $propertie = new Propertie($_POST);
+
+        $propertie->save();
+
+        debugger($propertie);
+
         //  echo "<pre>";
         // var_dump($_FILES);
         //  echo "</pre>";
@@ -180,7 +187,7 @@
             <fieldset>
                 <legend>Agent or Seller</legend>
 
-                <select name="seller">
+                <select name="seller_id">
                     <option value="" disabled selected>-- Select --</option>
 
                     <?php while($row = mysqli_fetch_assoc($result)) : ?>

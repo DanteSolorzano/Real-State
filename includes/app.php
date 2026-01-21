@@ -4,7 +4,10 @@ require 'functions.php';
 require 'config/database.php';
 require __DIR__ . '/../vendor/autoload.php';
 
+//connection db
+
+$db = connectionDb();
+
 use App\Propertie;
 
-$propertie = new Propertie;
-
+Propertie::setDB($db);

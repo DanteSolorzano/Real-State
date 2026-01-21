@@ -8,4 +8,3 @@ use App\Propertie;
 
 $propertie = new Propertie;
 
-var_dump($propertie);

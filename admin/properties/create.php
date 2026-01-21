@@ -1,13 +1,13 @@
 <?php
-    require '../../includes/functions.php';
-    $auth = isAuthenticated();
+    require '../../includes/app.php';
 
-    if(!$auth){
-        header('Location: /');
-    }
+    use App\Propertie;
+
+    isAuthenticated();
+
+    
 
     //database
-    require '../../includes/config/database.php';
     $db = connectionDb();
 
     //consult agents

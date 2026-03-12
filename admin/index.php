@@ -1,22 +1,13 @@
 <?php
 
-require '../includes/functions.php';
-$auth = isAuthenticated();
+require '../includes/app.php';
+isAuthenticated();
 
-if(!$auth){
-    header('Location: /');
-}
+use App\Propertie;
 
-    //import the db connection
-    require '../includes/config/database.php';
-    $db = connectionDb();
-
-    //write the query
-    $query = "SELECT * FROM properties;";
-
-    //consult the db
-
-    $consultResult = mysqli_query($db, $query);
+    //implement a method to obtain all the properties
+    $properties = Propertie::all();
+    
 
     //show a conditional message
     $resultCraete = $_GET['resultCreate'] ?? null;
@@ -43,7 +34,7 @@ if(!$auth){
             $result = mysqli_query($db, $query);
 
             if($result){
-                header('location: /admin?resultCreate=3');
+                header('Location: /admin?resultCreate=3');
             }
         }
 
@@ -82,24 +73,24 @@ if(!$auth){
             </tr>
             </thead>
             <tbody> <!-- Show the results -->
-                <?php while($propertie = mysqli_fetch_assoc($consultResult)): ?>
+                <?php foreach( $properties as $propertie ): ?>
             <tr>
-                <td> <?php echo $propertie['id']; ?>  </td>
-                    <td><?php echo $propertie['title']; ?></td>
-                    <td><img class="table-image" src="/images/<?php echo $propertie['image']; ?>" alt="image of property"></td>
-                    <td>$<?php echo $propertie['price']; ?></td>
+                <td> <?php echo $propertie->id; ?>  </td>
+                    <td><?php echo $propertie->title; ?></td>
+                    <td><img class="table-image" src="/images/<?php echo $propertie->image; ?>" alt="image of property"></td>
+                    <td>$<?php echo $propertie->price; ?></td>
                     <td>
                         <form method="POST" class="w-100">
 
-                            <input type="hidden" name="id" value="<?php echo $propertie['id'] ?>">
+                            <input type="hidden" name="id" value="<?php echo $propertie->id; ?>">
 
                             <input type="submit" class="red-button-block" value="Delete">
                         </form>
-                        <a class="yellow-button-block" href="/admin/properties/update.php?id=<?php echo $propertie['id']; ?>  ">Update</a>
+                        <a class="yellow-button-block" href="/admin/properties/update.php?id=<?php echo $propertie->id; ?>  ">Update</a>
                     </td>
             </tr>
 
-                <?php endwhile; ?>
+                <?php endforeach; ?>
             </tbody>
         </table>
 

@@ -6,7 +6,10 @@ class Propertie {
 
         //Database 
         protected static $db;
-        protected static $columnsDb = ['id', 'title', 'price', 'image', 'description', 'bedrooms', 'wc', 'parking', 'created_at', 'seller_id'];
+        protected static $columnsDb = ['id', 'title', 'price', 'image', 'description', 'bedrooms', 'wc', 'parking', 'created_at', 'sellers_id'];
+
+        //Errors
+        protected static $errors = [];
 
         public $id;
         public $title; 
@@ -17,7 +20,7 @@ class Propertie {
         public $wc; 
         public $parking; 
         public $created_at;
-        public $seller_id;
+        public $sellers_id;
 
          //define connection to db
         public static function setDB($database){
@@ -29,13 +32,13 @@ class Propertie {
             $this->id = $args['id'] ?? '';
             $this->title = $args['title'] ?? '';
             $this->price = $args['price'] ?? '';
-            $this->image = $args['image'] ?? 'image.jpg';
+            $this->image = $args['image'] ?? '';
             $this->description = $args['description'] ?? '';
             $this->bedrooms = $args['bedrooms'] ?? '';
             $this->wc = $args['wc'] ?? '';
             $this->parking = $args['parking'] ?? '';
             $this->created_at = date('Y/m/d') ?? '';
-            $this->seller_id = $args['seller_id'] ?? '';
+            $this->sellers_id = $args['sellers_id'] ?? '';
         }
 
         public function save() {
@@ -43,15 +46,16 @@ class Propertie {
             //Sanitize the data
             $attributes = $this->sanitizeAttributes();
 
-
-
             //insert in the database
-            $query = "INSERT INTO properties (title, price, image, description, bedrooms, wc, parking, created_at, sellers_id) VALUES ('$this->title', '$this->price', '$this->image', '$this->description', '$this->bedrooms', '$this->wc', '$this->parking', '$this->created_at', '$this->seller_id' )";
+            $query = "INSERT INTO properties ( ";
+            $query .= join(', ', array_keys($attributes)); 
+            $query .= " ) VALUES ('";  
+            $query .= join("', '", array_values($attributes)); 
+            $query .= "')";
           
-            $result = self::$db->query($query);
+            $resultado = self::$db->query($query);
 
-            debugger($result);
-
+            return $resultado;
         }
 
         //identify and join the attributes of the database
@@ -71,9 +75,103 @@ class Propertie {
             foreach($attributes as $key => $value){
                 $sanitice[$key] = self::$db->escape_string($value);
             }
-            debugger($attributes);
+            return $sanitice; 
         }
 
-       
+        public static function getErrors(){
+            return self::$errors;
+        }
+
+        //validate
+        public function validate(){
+
+        if(!$this->title){
+            self::$errors[] = 'A title is required';
+        } elseif (strlen($this->title) > 45) {  // Asegurar que no supere 45 caracteres
+            self::$errors[] = 'The title cannot exceed 45 characters';
+        }
+
+        if(!$this->price){
+            self::$errors[] = 'A price is required';
+        }
+
+        if(strlen($this->description) < 50){
+            self::$errors[] = 'A description is required and must be at least 50 characters long';
+        }
+
+        if(empty($_FILES['image']['name']) || $_FILES['image']['size'] === 0) {
+            self::$errors[] = 'You must select an image file';
+        } 
+
+        if(!$this->bedrooms){
+            self::$errors[] = 'The number of bedrooms is required';
+        }
+
+        if(!$this->wc){
+            self::$errors[] = 'The number of wc is required';
+        }
+
+        if(!$this->parking){
+            self::$errors[] = 'The number of parking is required';
+        }
+
+        // Usamos sellers_id con "s" como lo corregimos anteriormente
+        if(!$this->sellers_id){
+            self::$errors[] = 'You have to select a seller or agent';
+        }
+
+        if (!$this->image){
+            self::$errors[] = 'An image is required';
+        }
+
+        return self::$errors; // Es buena práctica retornar el arreglo de errores al final
+    }
+
+    public function setImage($image){
+        if($image) {
+            $this->image = $image;
+        }
+    }
+
+    //list al the poperties
+    public static function all() {
+        $query = "SELECT * FROM properties";
+
+        $result = self::consultSQL($query);
+
+        return $result;
+    }
+
+    public static function consultSQL($query) {
+        //consult the database
+        $result = self::$db->query($query);
+
+        //iterate on the result
+        $array = [];
+        while($registration = $result->fetch_assoc()){
+            $array[] = self::createObject($registration);
+        }
+
+        //free the storage
+        $result->free();
+
+        //return the result
+        return $array;
+    }
+
+    protected static function createObject($registration){
+
+            $object = new self;
+
+            foreach($registration as $key => $value){
+                if(property_exists( $object, $key )){
+                        $object->$key = $value;
+                }
+            }
+
+        return $object;
+
+    }
+
 
 }

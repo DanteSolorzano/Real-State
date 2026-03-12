@@ -2,6 +2,8 @@
     require '../../includes/app.php';
 
     use App\Propertie;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager as Image;
 
     isAuthenticated();
 
@@ -16,7 +18,9 @@
     $result = mysqli_query($db, $consult);
 
     //Arreglo con mensajes de errores
-    $errors = [];
+    $errors = Propertie::getErrors();
+
+    //debugger($errors);
 
         $title = '';
         $price = '';
@@ -32,99 +36,31 @@
 
         $propertie = new Propertie($_POST);
 
-        $propertie->save();
-
-        debugger($propertie);
-
-        //  echo "<pre>";
-        // var_dump($_FILES);
-        //  echo "</pre>";
-
-        $title = mysqli_real_escape_string( $db, $_POST['title']);
-        $price = mysqli_real_escape_string( $db, $_POST['price']);
-        $description = mysqli_real_escape_string( $db, $_POST['description']);
-        $bedrooms = mysqli_real_escape_string( $db, $_POST['bedrooms']);
-        $wc = mysqli_real_escape_string( $db, $_POST['wc']);
-        $parking = mysqli_real_escape_string( $db, $_POST['parking']);
-        $seller_id = mysqli_real_escape_string( $db, $_POST['seller'] ?? '');
-        $created_at = date('Y/m/d');
-
-        //asign files to a variable
-        $image = $_FILES['image'];
-
-
-        if(!$title){
-            $errors[] = 'a title is required';
-        } elseif (strlen($title) > 45) {  // Asegurar que no supere 45 caracteres
-            $errors[] = 'The title cannot exceed 45 characters';
+        //generate a unique name
+        $image_name = md5( uniqid(rand( ), true )) . '.jpg';
+        if($_FILES['image']['tmp_name']){
+            $manager = new Image(Driver::class);
+            $image = $manager->read($_FILES['image']['tmp_name'])->cover(800, 600);
+            $propertie->setImage($image_name);
         }
 
-        if(!$price){
-            $errors[] = 'a price is required';
-        }
 
-        if(strlen($description) < 50){
-            $errors[] = 'a description is required and must be at least 50 characters long';
-        }
 
-        if(empty($_FILES['image']['name']) || $_FILES['image']['size'] === 0) {
-            $errors[] = 'You must select an image file';
-        } 
+        $errors = $propertie->validate();
 
-        if(!$bedrooms){
-            $errors[] = 'The number of bedrooms is required';
-        }
-
-        if(!$wc){
-            $errors[] = 'The number of wc is required';
-        }
-
-        if(!$parking){
-            $errors[] = 'The number of parking is required';
-        }
-
-        if(!$seller_id){
-            $errors[] = 'You have to select a seller or agent';
-        }
-
-        //validate image by size 
-        $size = 2 * 1024 * 1024;
-
-        if($image['size']>$size){
-            $errors[] = 'Image file size is too large.';
-        }
 
         
-
-        // echo "<pre>";
-        // var_dump($errors);     
-        // echo "</pre>";
-
-        //validate the 
         if(empty($errors)){
 
-            //Upload files
 
-            //create a directory
-            $image_directory = '../../images/';
-
-
-            if(!is_dir($image_directory)){
-                mkdir($image_directory);
+            if(!is_dir(IMAGES_FILE)){
+                mkdir(IMAGES_FILE);
             }
+            // Save the image in the server
+            $image->save(IMAGES_FILE . $image_name);
 
-            // Get extension of the file
-            $extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION); // Ej: "jpg", "png"
 
-            //generate a unique name
-            $image_name = md5( uniqid(rand( ), true )) . '.' . $extension;
-
-            move_uploaded_file($image['tmp_name'], $image_directory . $image_name);
-
-            $query = "INSERT INTO properties (title, price, image, description, bedrooms, wc, parking, created_at, sellers_id) VALUES ('$title', '$price', '$image_name', '$description', '$bedrooms', '$wc', '$parking', '$created_at', '$seller_id' )";
-
-            //insert on the database
-            $resultado = mysqli_query($db, $query);
+            $resultado = $propertie->save();
     
              if($resultado){
                  //redirect the user after create a propertie
@@ -187,7 +123,7 @@
             <fieldset>
                 <legend>Agent or Seller</legend>
 
-                <select name="seller_id">
+                <select name="sellers_id">
                     <option value="" disabled selected>-- Select --</option>
 
                     <?php while($row = mysqli_fetch_assoc($result)) : ?>

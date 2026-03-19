@@ -22,3 +22,9 @@ function debugger($variable){
     echo "</pre>";
     exit;
 }
+
+//Scape // sanitize html
+function s($html) : string{
+    $s = htmlspecialchars($html);
+    return $s;
+}

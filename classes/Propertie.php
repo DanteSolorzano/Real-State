@@ -38,7 +38,7 @@ class Propertie {
             $this->wc = $args['wc'] ?? '';
             $this->parking = $args['parking'] ?? '';
             $this->created_at = date('Y/m/d') ?? '';
-            $this->sellers_id = $args['sellers_id'] ?? '';
+            $this->sellers_id = $args['sellers_id'] ?? 1;
         }
 
         public function save() {
@@ -133,7 +133,7 @@ class Propertie {
         }
     }
 
-    //list al the poperties
+    //list all the poperties
     public static function all() {
         $query = "SELECT * FROM properties";
 
@@ -141,6 +141,16 @@ class Propertie {
 
         return $result;
     }
+
+    //Find a propertie by id
+    public static function find($id) {
+            $query = "SELECT * FROM properties WHERE id = {$id}";
+            $result = self::consultSQL($query);
+
+            return (array_shift($result));
+
+    }
+
 
     public static function consultSQL($query) {
         //consult the database
@@ -171,6 +181,15 @@ class Propertie {
 
         return $object;
 
+    }
+
+    //syncronize the object on memory with the changes made by the user
+    public function syncr( $args = [] ) {
+            foreach($args as $key => $value){
+                if(property_exists($this, $key) && !is_null($value)){
+                    $this->$key = $value;
+                }
+            }
     }
 
 

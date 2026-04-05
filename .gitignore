@@ -1,0 +1,15 @@
+# node modules
+node_modules/
+
+# carpetas de salida generadas por gulp
+dist/
+public/
+
+#user
+
+# archivos temporales o del sistema
+.DS_Store
+*.log
+.vercel
+
+/vendor/

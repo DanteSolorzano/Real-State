@@ -55,13 +55,7 @@
             $image->save(IMAGES_FILE . $image_name);
 
 
-            $resultado = $propertie->save();
-    
-             if($resultado){
-                 //redirect the user after create a propertie
-
-                 header('Location: /admin?resultCreate=1');
-              }
+            $propertie->save();
 
         }
         

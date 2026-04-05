@@ -29,7 +29,7 @@ class Propertie {
 
         public function __construct($args = [])
         {
-            $this->id = $args['id'] ?? '';
+            $this->id = $args['id'] ?? null;
             $this->title = $args['title'] ?? '';
             $this->price = $args['price'] ?? '';
             $this->image = $args['image'] ?? '';
@@ -42,14 +42,13 @@ class Propertie {
         }
 
         public function save() {
-            if(isset($this->id)){
+            if(!is_null($this->id)){
                 $this->update();
-                //update
             } else {
                 //create a new property
                 $this->create();
             }
-        }
+    }
 
         public function create() {
             
@@ -63,9 +62,13 @@ class Propertie {
             $query .= join("', '", array_values($attributes)); 
             $query .= "')";
           
-            $resultado = self::$db->query($query);
+            $result = self::$db->query($query);
 
-            return $resultado;
+            if($result){
+                 //redirect the user after create a propertie
+
+                 header('Location: /admin?resultCreate=1');
+              }
         }
 
         public function update(){
@@ -85,12 +88,23 @@ class Propertie {
             $result = self::$db->query($query);
     
              if($result){
-                 //redirect the user after create a propertie
-
+                 //redirect the user after update a propertie
                  header('Location: /admin?resultCreate=2');
             }
-            
-            
+        }
+
+        //delete
+        public function delete() {
+
+            $query = "DELETE FROM properties WHERE id = " . self::$db->escape_string($this->id) . " LIMIT 1";
+            $result = self::$db->query($query);
+                
+                 if($result){
+                $this->deleteImage();
+                 //redirect the user after delete a propertie
+                 header('Location: /admin?resultCreate=3');
+            }
+
         }
 
         //identify and join the attributes of the database
@@ -165,16 +179,21 @@ class Propertie {
     public function setImage($image){
         //delete the previous image if you updating a porperty
 
-        if(isset($this->id)){
-            $existsFile = file_exists(IMAGES_FILE . $this->image);
-            if($existsFile){
-                unlink(IMAGES_FILE . $this->image);
-            }
+        if(!is_null($this->id)){
+            $this->deleteImage();
         }
 
         if($image) {
             $this->image = $image;
         }
+    }
+
+    //delete the file 
+    public function deleteImage(){
+        $existsFile = file_exists(IMAGES_FILE . $this->image);
+            if($existsFile){
+                unlink(IMAGES_FILE . $this->image);
+            }
     }
 
     //list all the poperties

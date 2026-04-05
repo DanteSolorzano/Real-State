@@ -56,8 +56,9 @@
         //validate the 
         if(empty($errors)){
 
-            //save the image in the disc
-            $image->save(IMAGES_FILE . $image_name);
+            if(isset($image)) {
+                $image->save(IMAGES_FILE . $image_name);
+            }
 
             $result = $propertie->save();
         }

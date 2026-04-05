@@ -19,23 +19,17 @@ use App\Propertie;
         $id = filter_var($id, FILTER_VALIDATE_INT);
 
         if($id){
-            //delete the image from the directory
-            $query = "SELECT image FROM properties WHERE id = {$id}";
 
-            $result = mysqli_query($db, $query);
-            $propertie = mysqli_fetch_assoc($result);
+            $propertie = Propertie::find($id);
 
-            unlink('../images/' . $propertie['image']);
+            $propertie->delete();
 
-            //delate the propertie on the db
+     
 
-            $query = "DELETE FROM properties WHERE id = {$id}";
 
-            $result = mysqli_query($db, $query);
 
-            if($result){
-                header('Location: /admin?resultCreate=3');
-            }
+
+           
         }
 
     }

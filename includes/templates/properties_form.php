@@ -33,6 +33,17 @@
 
             <fieldset>
                 <legend>Agent or Seller</legend>
+                
+                <label for="seller">Seller</label>
+                <select name="propertie[sellers_id]" id="seller">
+                        <option selected value="">--Select--</option>
+                    <?php foreach($sellers as $seller) {?>
+                        <option
+                         <?php echo $propertie->sellers_id === $seller->id ? 'selected' : ''; ?>
+                        value="<?php echo s($seller->id); ?>"> 
+                            <?php echo s($seller->name) . " " . s($seller->lastname); ?> </option>
+                    <?php } ?>
+                </select>
 
             
             </fieldset>

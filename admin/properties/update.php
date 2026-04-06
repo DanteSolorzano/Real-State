@@ -1,6 +1,7 @@
 <?php
 
     use App\Propertie;
+    use App\Seller;
     use Intervention\Image\Drivers\Gd\Driver;
     use Intervention\Image\ImageManager as Image;
 
@@ -19,12 +20,9 @@
     //obtain data of the propertie
     $propertie = Propertie::find($id);
 
+    //consult to obtain all the sellers
+    $sellers = Seller::all();
 
-
-    //consult agents
-
-    $consult = "SELECT * FROM sellers";
-    $result = mysqli_query($db, $consult);
 
     //Arreglo con mensajes de errores
     $errors = Propertie::getErrors();
@@ -55,12 +53,12 @@
 
         //validate the 
         if(empty($errors)){
-
-            if(isset($image)) {
+            if(isset($_FILES['propertie']['tmp_name']['image']) && $_FILES['propertie']['tmp_name']['image']){
+                
                 $image->save(IMAGES_FILE . $image_name);
             }
 
-            $result = $propertie->save();
+            $propertie->save();
         }
     }
 

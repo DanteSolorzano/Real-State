@@ -4,13 +4,15 @@ require '../includes/app.php';
 isAuthenticated();
 
 use App\Propertie;
+use App\Seller;
 
     //implement a method to obtain all the properties
     $properties = Propertie::all();
+    $sellers = Seller::all();
     
 
     //show a conditional message
-    $resultCraete = $_GET['resultCreate'] ?? null;
+    $resultMessage = $_GET['resultCreate'] ?? null;
 
     //Code to delete
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -20,18 +22,20 @@ use App\Propertie;
 
         if($id){
 
-            $propertie = Propertie::find($id);
+            $type = $_POST['type'];
 
-            $propertie->delete();
+            if(validateTypeOfContent($type)){
 
-     
-
-
-
-
-           
+                //compare what we going to delete
+                if($type === 'seller'){
+                    $seller = Seller::find($id);
+                    $seller->delete();
+                } else if($type === 'propertie'){
+                    $propertie = Propertie::find($id);
+                    $propertie->delete();
+                }
+            }        
         }
-
     }
 
     //add a template
@@ -42,20 +46,17 @@ use App\Propertie;
     <main class="container section">
         <h1>Admin of Real State</h1>
 
-        <?php if( intval($resultCraete) === 1): ?>
-            <p class="alert success">The property has been added successfully.</p>
-            <?php elseif( intval($resultCraete) === 2): ?>
-                <p class="alert success">The property has been updated successfully.</p>
-                <?php elseif( intval($resultCraete) === 3): ?>
-                    <p class="alert success">The property has been deleted successfully.</p>
-
-        <?php endif; ?>
-
+        <?php 
+            $message = showMessage(intval($resultMessage) );
+            if($message) { ?>
+                <p class="alert success"><?php echo s($message) ?> </p>
+            <?php } ?>
 
         <a href="/admin/properties/create.php" class="button green-button">New Propertie</a>
+        <a href="/admin/sellers/create.php" class="button green-button">New Seller</a>
 
 
-
+        <h2>Properties</h2>
         <table class="properties">
             <thead>
             <tr>
@@ -77,6 +78,7 @@ use App\Propertie;
                         <form method="POST" class="w-100">
 
                             <input type="hidden" name="id" value="<?php echo $propertie->id; ?>">
+                            <input type="hidden" name="type" value="propertie">
 
                             <input type="submit" class="red-button-block" value="Delete">
                         </form>
@@ -88,12 +90,43 @@ use App\Propertie;
             </tbody>
         </table>
 
+        <h2>Sellers</h2>
+
+         <table class="properties">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>PHONE #</th>
+                <th>ACTIONS</th>
+            </tr>
+            </thead>
+            <tbody> <!-- Show the results -->
+                <?php foreach( $sellers as $seller ): ?>
+            <tr>
+                <td> <?php echo $seller->id; ?>  </td>
+                    <td><?php echo $seller->name . " " . $seller->lastname; ?></td>
+                    <td><?php echo $seller->phone_number; ?></td>
+                    <td>
+                        <form method="POST" class="w-100">
+
+                            <input type="hidden" name="id" value="<?php echo $seller->id; ?>">
+                            <input type="hidden" name="type" value="seller">
+
+
+                            <input type="submit" class="red-button-block" value="Delete">
+                        </form>
+                        <a class="yellow-button-block" href="/admin/sellers/update.php?id=<?php echo $seller->id; ?>  ">Update</a>
+                    </td>
+            </tr>
+
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+
     </main>
 
     <?php 
-
-    //close the db connection
-    mysqli_close($db);
 
     includeTemplates('footer');
 

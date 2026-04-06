@@ -1,26 +1,20 @@
 <?php
     require '../../includes/app.php';
     use App\Propertie;
+    use App\Seller;
     use Intervention\Image\Drivers\Gd\Driver;
     use Intervention\Image\ImageManager as Image;
 
     isAuthenticated();   
 
-    //database
-    $db = connectionDb();
-
+    
     $propertie = new Propertie;
 
-    //consult agents
-
-    $consult = "SELECT * FROM sellers";
-    $result = mysqli_query($db, $consult);
+    //consult to obtain all the sellers
+    $sellers = Seller::all();
 
     //Arreglo con mensajes de errores
-    $errors = Propertie::getErrors();
-
-
-        
+    $errors = Propertie::getErrors();   
 
     //Ejecutar despues de que el usuario envie el formulario
     if($_SERVER['REQUEST_METHOD'] === 'POST'){

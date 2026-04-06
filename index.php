@@ -29,7 +29,6 @@
     <h2 data-translate="index-anuncios-titulo">Houses & Apartments for sale</h2>
 
     <?php 
-        $limit_properties = 3;
         include 'includes/templates/announcements.php';
     ?>
 

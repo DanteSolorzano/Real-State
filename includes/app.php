@@ -8,6 +8,6 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $db = connectionDb();
 
-use App\Propertie;
+use App\ActiveRecord;
 
-Propertie::setDB($db);
+ActiveRecord::setDB($db);

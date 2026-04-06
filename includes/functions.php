@@ -28,3 +28,31 @@ function s($html) : string{
     $s = htmlspecialchars($html);
     return $s;
 }
+
+//validate type of contentc
+function validateTypeOfContent($type){
+    $types = ['seller', 'propertie'];
+
+    return in_array($type, $types);
+}
+
+//show the messages
+function showMessage($code){
+    $message = '';
+
+    switch($code){
+        case 1: 
+            $message = 'Created successfully.';
+            break;
+         case 2: 
+            $message = 'Updated successfully.';
+            break;
+         case 3: 
+            $message = 'Deleted successfully.';
+            break;
+        default:
+            $messsage = false;
+            break;
+    }
+    return $message;
+}

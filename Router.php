@@ -11,6 +11,9 @@ class Router {
         $this->getRoutes[$url] = $fn; 
     }
 
+    public function post($url, $fn){
+        $this->postRoutes[$url] = $fn; 
+    }
 
     public function checkNavigation() {
         $urlActual = $_SERVER['PATH_INFO'] ?? '/';
@@ -18,6 +21,8 @@ class Router {
 
         if($metod === 'GET'){
             $fn = $this->getRoutes[$urlActual] ?? null;
+        } else {
+            $fn = $this->postRoutes[$urlActual] ?? null;
         }
 
         if($fn) {
@@ -30,7 +35,11 @@ class Router {
     }
 
     //Show a view
-    public function render($view){
+    public function render($view, $data = []){
+
+        foreach($data as $key => $value) {
+            $$key = $value;
+        };
 
         ob_start();
         include __DIR__ . "/views/$view.php";

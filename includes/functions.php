@@ -2,7 +2,7 @@
 
 define('TEMPLATES_URL', __DIR__ . '/templates');
 define('FUNCIONES_URL', __DIR__ . 'funciones.php');
-define('IMAGES_FILE', __DIR__ . '/../images/');
+define('IMAGES_FILE', $_SERVER['DOCUMENT_ROOT'] . '/images/');
 
 function includeTemplates( string $name, bool $home = false ){
     include TEMPLATES_URL . "/{$name}.php";
@@ -55,4 +55,15 @@ function showMessage($code){
             break;
     }
     return $message;
+}
+
+function validateOrRedirect(string $url){
+     //validate the id
+    $id = $_GET['id'];
+    $id = filter_var($id, FILTER_VALIDATE_INT);
+
+    if(!$id){
+        header("Location: {$url}");
+    }
+    return $id;
 }

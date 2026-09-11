@@ -55,6 +55,12 @@ function eventListeners() {
     mobileMenu.addEventListener("click", navegationResponsive);
   }
 
+  //show conditional areaas
+  const contactMethod = document.querySelectorAll('input[name="contact[contact]"]')
+
+  contactMethod.forEach(input => input.addEventListener('click', showContactMethod))
+
+  //translation 
   const translateButton = document.querySelector(".translate");
 
   translateButton.addEventListener("click", function () {
@@ -329,4 +335,29 @@ function changeLanguage() {
       }
     }
   });
+}
+
+function showContactMethod(e){
+  const contactDiv = document.querySelector('#contact');
+
+  if(e.target.value === 'tel'){
+    contactDiv.innerHTML = `
+            <label for="phoneNumber" data-translate="contacto-label-tel">Phone number</label>
+            <input type="tel" placeholder="Your Phone Number" id="phoneNumber" data-translate="contacto-ph-tel" name="contact[phoneNumber]" >
+
+            <p data-translate="contacto-aviso">Please select a date and time to receive a call</p>
+            
+            <label for="date" data-translate="contacto-label-fecha">Date:</label>
+            <input type="date" id="date" name="contact[date]" >
+
+            <label for="time" data-translate="contacto-label-hora">Time:</label>
+            <input type="time" id="time" min="09:00" max="18:00" name="contact[time]" >
+    `;
+  } else {
+    contactDiv.innerHTML = `
+            <label for="email" data-translate="contacto-label-email">E-mail</label> 
+            <input type="email" placeholder="Your E-mail" id="email" data-translate="contacto-ph-email" name="contact[email]" required>     
+    
+    `;
+  }
 }

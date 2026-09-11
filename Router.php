@@ -16,6 +16,14 @@ class Router {
     }
 
     public function checkNavigation() {
+
+        session_start();
+
+        $auth = $_SESSION['login'] ?? null;
+        //array of protected routers
+        $protected_routes = ['/admin', '/properties/create', '/properties/delete', '/properties/update', 'sellers/create', '/sellers/update', '/sellers/delete'];
+
+
         $urlActual = $_SERVER['PATH_INFO'] ?? '/';
         $metod = $_SERVER['REQUEST_METHOD'];
 
@@ -23,6 +31,12 @@ class Router {
             $fn = $this->getRoutes[$urlActual] ?? null;
         } else {
             $fn = $this->postRoutes[$urlActual] ?? null;
+        }
+
+
+        //protect the routers
+        if(in_array($urlActual, $protected_routes) && !$auth ){
+            header('Location: /');
         }
 
         if($fn) {

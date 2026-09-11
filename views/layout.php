@@ -50,7 +50,7 @@
                         <a href="/contact" data-translate="nav-contacto">Contact</a>
                         
                         <?php if($auth): ?>
-                        <a href="/logOut" data-translate="nav-cerrar"
+                        <a href="/logout" data-translate="nav-cerrar"
                         style="color: #71B100; font-weight: bold;">
                         Sign Out
                         </a>

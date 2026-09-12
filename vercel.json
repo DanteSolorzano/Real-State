@@ -3,6 +3,10 @@
     {
       "src": "public/index.php",
       "use": "vercel-php@0.7.2"
+    },
+    {
+      "src": "public/build/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
@@ -10,7 +14,6 @@
       "src": "/build/(.*)",
       "dest": "/public/build/$1"
     },
-    { "handle": "filesystem" },
     {
       "src": "/(.*)",
       "dest": "/public/index.php"

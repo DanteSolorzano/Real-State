@@ -24,8 +24,7 @@ class Router {
         $protected_routes = ['/admin', '/properties/create', '/properties/delete', '/properties/update', 'sellers/create', '/sellers/update', '/sellers/delete'];
 
 
-        $urlActual = $_SERVER['PATH_INFO'] ?? '/';
-        $metod = $_SERVER['REQUEST_METHOD'];
+        $urlActual = strtok($_SERVER['REQUEST_URI'], '?') ?? '/';        $metod = $_SERVER['REQUEST_METHOD'];
 
         if($metod === 'GET'){
             $fn = $this->getRoutes[$urlActual] ?? null;

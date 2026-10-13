@@ -20,7 +20,7 @@
 <section class="image-contact">
     <h2 data-translate="index-contacto-titulo">Find your Dream House</h2>
     <p data-translate="index-contacto-texto">Complete the form and one of our advisors will get in touch with you shortly</p>
-    <a href="contact.php" class="yellow-button" data-translate="index-contacto-boton">Contact Us</a>
+    <a href="contact" class="yellow-button" data-translate="index-contacto-boton">Contact Us</a>
 </section>
 
 <div class="container section bottom-section">
